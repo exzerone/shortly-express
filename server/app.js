@@ -94,30 +94,51 @@ app.post('/links',
 
 
 app.post ('/login', (req, res)=> {
-   var username = req.body.username;
-   var password = req.body.password;
+  var username = req.body.username;
+  var password = req.body.password;
+  models.Users.get({username:username})
+    .then((result)=>{
+      if (!result){
+        console.log('this is undefined ', result);
+        res.redirect('/login');
+      } else {
+        console.log('successful fetch result ', result);
+        if (username === result.username){
+          if(models.Users.compare(password, result.password, result.salt)){
+            console.log('true');
+            res.redirect('/');
+          } else {
+            res.redirect('/login')
+          }
+        }
+      }
+    })
 });
 
 app.post('/signup', (req, res) => {
-  // we have to get the username from DB
-  // We have to pass in an obj with username as key and then 
-  //request.body.username as value
+
   var username = req.body.username;
   var password = req.body.password;
   models.Users.get({username: username})
     .then((result)=>{
-      console.log('username exist', result)
       if (!result){
         models.Users.create({ username, password})
-      } else {
         res.redirect('/');
+      } else {
+        // console.log(result);
+        res.redirect('/signup');
       }
     })
 })
 
-app.get('/signup', (req, res)=> {
-  res.render('signup')
+app.get('/', (req, res)=> {
+  res.redirect('/signup')
 })
+
+app.get('/login', (req, res)=>{
+  res.render('/login')
+})
+
 
 
 
