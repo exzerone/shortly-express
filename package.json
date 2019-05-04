@@ -27,8 +27,10 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "cors": "^2.8.5",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "jsdoc": "^3.5.3",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "nodemon": "^1.19.0"
   }
 }

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const Auth = require('./middleware/auth');
 const models = require('./models');
 
+
 const app = express();
 
 app.set('views', `${__dirname}/views`);
@@ -77,6 +78,66 @@ app.post('/links',
 /************************************************************/
 // Write your authentication routes here
 /************************************************************/
+//---> STEP1 :
+
+// Add routes to your Express server to process incoming POST requests. 
+
+// These routes should enable a user to register for a new account and
+
+// for users to log in to your application. 
+
+// Take a look at the login.ejs and signup.ejs to decide
+
+// app.post('/hello', function(req, res) {
+//   res.send('look at me!');
+// });
+
+
+app.post ('/login', (req, res)=> {
+   var username = req.body.username;
+   var password = req.body.password;
+});
+
+app.post('/signup', (req, res) => {
+  // we have to get the username from DB
+  // We have to pass in an obj with username as key and then 
+  //request.body.username as value
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log('hi');
+  // if(models.Users.get({ username:username })){
+  //   return error;
+  // } else {
+  //   res.status(200);
+  //   res.end();
+  // }
+  
+})
+
+app.get('/signup', (req, res)=> {
+  res.render('signup')
+})
+
+
+
+
+
+
+
+
+
+
+
+// ---> STEP2 : Add the appropriate callback functions to your new routes.
+//  Add methods to your user model, as necessary, to keep your code modular 
+
+
+
+
+
+
+
+
 
 
 
