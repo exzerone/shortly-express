@@ -104,14 +104,16 @@ app.post('/signup', (req, res) => {
   //request.body.username as value
   var username = req.body.username;
   var password = req.body.password;
-  console.log('hi');
+  // console.log(req.body.username);
   // if(models.Users.get({ username:username })){
   //   return error;
   // } else {
   //   res.status(200);
   //   res.end();
   // }
-  
+  models.Users.create({ username: username, password:password});
+
+  res.redirect('/');
 })
 
 app.get('/signup', (req, res)=> {
